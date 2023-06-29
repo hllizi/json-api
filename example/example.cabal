@@ -27,7 +27,7 @@ library
     Users.Actions.Index
     Users.Actions.Show
 
-  build-depends: base           >= 4.7 && < 5
+  build-depends: base
                , aeson
                , containers
                , data-default

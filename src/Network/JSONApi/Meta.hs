@@ -10,7 +10,8 @@ module Network.JSONApi.Meta
 )where
 
 import Data.Aeson (ToJSON, FromJSON, Object, toJSON)
-import Data.HashMap.Strict as HM
+import Data.Aeson.KeyMap as KM
+import Data.Aeson.Key
 import Data.Text (Text)
 import qualified GHC.Generics as G
 import Control.DeepSeq (NFData)
@@ -44,10 +45,10 @@ instance ToJSON Meta
 instance FromJSON Meta
 
 instance Semigroup Meta where
-  (<>) (Meta a) (Meta b) = Meta $ HM.union a b
+  (<>) (Meta a) (Meta b) = Meta $ KM.union a b
 
 instance Monoid Meta where
-  mempty = Meta $ HM.empty
+  mempty = Meta $ KM.empty
 
 {- |
 Convienience class for constructing a Meta type
@@ -65,7 +66,7 @@ Example usage:
 @
 -}
 class (ToJSON a) => MetaObject a where
-  typeName :: a -> Text
+  typeName :: a -> Data.Aeson.Key.Key 
 
 {- |
 Convienience constructor function for the Meta type
@@ -76,4 +77,4 @@ Example usage:
 See MetaSpec.hs for an example
 -}
 mkMeta :: (MetaObject a) => a -> Meta
-mkMeta obj = Meta $ HM.singleton (typeName obj) (toJSON obj)
+mkMeta obj = Meta $ KM.singleton (typeName obj) (toJSON obj)
