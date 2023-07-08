@@ -54,7 +54,7 @@ instance (ToJSON a) => ToJSON (Resource a) where
 
 instance (FromJSON a) => FromJSON (Resource a) where
   parseJSON = AE.withObject "resourceObject" $ \v -> do
-    id    <- v .: "id"
+    id    <- v .:? "id"
     typ   <- v .: "type"
     attrs <- v .: "attributes"
     links <- v .:? "links"
