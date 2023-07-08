@@ -57,13 +57,13 @@ myRelationshipss =
 relationship :: Relationship
 relationship =
   fromJust $ mkRelationship
-    (Just $ Identifier "42" "FriendOfTestObject" Nothing)
+    (Just $ Identifier (Just "42") "FriendOfTestObject" Nothing)
     (Just myResourceLinks)
 
 otherRelationship :: Relationship
 otherRelationship =
   fromJust $ mkRelationship
-    (Just $ Identifier "49" "CousinOfTestObject" Nothing)
+    (Just $ Identifier (Just "49") "CousinOfTestObject" Nothing)
     (Just myResourceLinks)
 
 myResourceLinks :: Links

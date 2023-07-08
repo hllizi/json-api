@@ -81,7 +81,7 @@ class ResourcefulEntity a where
   toResource :: a -> Resource a
   toResource a =
     Resource
-      (Identifier (resourceIdentifier a) (resourceType a) (resourceMetaData a))
+      (Identifier (Just $ resourceIdentifier a) (resourceType a) (resourceMetaData a))
       a
       (resourceLinks a)
       (resourceRelationships a)
